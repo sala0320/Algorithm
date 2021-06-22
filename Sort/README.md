@@ -20,7 +20,7 @@ y >>> [1, 2, 3, 11]
 z >>> [11, 2, 3, 1]
 ```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7303a8a-0baf-498b-ad5f-7ca9f3224dc1/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7303a8a-0baf-498b-ad5f-7ca9f3224dc1/Untitled.png)
+(https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7303a8a-0baf-498b-ad5f-7ca9f3224dc1/Untitled.png)
 
 ### 1. 삽입 정렬
 
