@@ -2,8 +2,22 @@
 
 ### 나의 풀이
 - 소수 찾기
+```{.python}
+  def is_prime(x):
+    for i in range(2, x):
+        if x % i == 0:
+            return False
+    return True
+``` 
 - 순열
+```{.python}
+from itertools import permutations
+    list(map(''.join, permutations(num_list,i)))
+```
 - 유일값
+```{.python}
+  set(answer)
+```
 
 ### 문제 설명  
 한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.
