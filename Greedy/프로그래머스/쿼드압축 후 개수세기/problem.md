@@ -12,7 +12,7 @@ a = [1,0]
 b = [1,0]  
 c = [0,1]  
 d = [1,0]  
-list(mape(sum, zip(a,b,c,d)))  
+list(map(sum, zip(a,b,c,d)))  
 output : [3,1]
 
 ![image](https://user-images.githubusercontent.com/49435163/124087117-ad239900-da8c-11eb-8bcf-9c312ed2f3d9.png)
