@@ -19,6 +19,7 @@ int main()
             flag = false;
         marco.push_back(num[i] - '0');
     }
+    //각 자리 수 합 3의 배수 아니거나, 끝자리수 0아니면
     if(sum % 3 || flag)
     {
         cout << "-1" << endl;
