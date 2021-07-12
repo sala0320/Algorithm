@@ -5,8 +5,10 @@ using namespace std;
 vector<int> parent; 
 int find(int num)
 {
+    //부모노드와 값이 같을  때
     if(parent[num] == num)
         return num;
+    ///부모노드와 값이 다를 때 -> 부모노드에 값 연결(재귀)
     else
         return parent[num] = find(parent[num]);
 }
@@ -17,6 +19,7 @@ void uni(int a, int b)
 
     if(pa == pb)
         return;
+    //부모노드가 다르면 합치기
     parent[pb] = pa;
 }
 int main()
