@@ -1,7 +1,7 @@
-N, M = int(input()), int(input())
-cost = [list(map(int, input().split())) for i in range(M)]
+V, E = int(input()), int(input())
+cost = [list(map(int, input().split())) for i in range(E)]
 cost.sort(key=lambda x : x[2])
-parent = [i for i in range(N+1)]
+parent = [i for i in range(V+1)]
 result = 0
 def find(x):
     if parent[x] != x:
