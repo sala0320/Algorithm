@@ -32,9 +32,6 @@ now = deque([[0,0]])
 #움직인 시간
 time = 1 
 
-def change_direction(direction):
-    return 0
-    
 while(1):
     
     nx = now[-1][0] + move[direction][0]
