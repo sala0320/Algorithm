@@ -40,15 +40,12 @@ while(1):
     nx = now[-1][0] + move[direction][0]
     ny = now[-1][1] + move[direction][1]
 
-    print(nx, ny)
+    print("[ " + str(nx) + ", " + str(ny) + " ]")
     if (nx >= N) or (ny >= N) or (nx < 0) or (ny < 0) or (board[nx][ny][1] == 1):
         print(time)
-        for i in range(N):
-            print(board[i])
-        break    
-    
+        break
+
     else:
-        print("time : " + str(time))
         #뱀 위치에 추가 및 보드에 뱀 위치 추가
         now.append([nx, ny])
         board[nx][ny][1] = 1
@@ -65,14 +62,18 @@ while(1):
     if (len(turn) > 0) and (int(turn[0][0]) == time):
         d = turn[0][1]
         turn.pop(0)
-        if (direction == 0 and d == 'D') or (direction == 2 and d == 'L'):
-            direction = 3
-        elif (direction == 0 and d == 'L') or (direction == 2 and d == 'D'):
-            direction = 1
-        elif (direction == 1 and d == 'D') or (direction == 3 and d == 'L'):
-            direction = 0
-        elif (direction == 1 and d == 'L') or (direction == 3 and d == 'D'):
-            direction = 2
+        if d == 'D':
+            direction = (direction - 1) % 4
+        else:
+            direction = (direction + 1) % 4
+        # if (direction == 0 and d == 'D') or (direction == 2 and d == 'L'):
+        #     direction = 3
+        # elif (direction == 0 and d == 'L') or (direction == 2 and d == 'D'):
+        #     direction = 1
+        # elif (direction == 1 and d == 'D') or (direction == 3 and d == 'L'):
+        #     direction = 0
+        # elif (direction == 1 and d == 'L') or (direction == 3 and d == 'D'):
+        #     direction = 2
 
     time += 1
 
