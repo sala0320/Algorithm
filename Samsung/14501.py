@@ -1,0 +1,13 @@
+N = int(input())
+#T, P
+time_table = [list(map(int, input().split())) for _ in range(N)]
+dp = [0 for i in range(N+1)]
+
+for i in range(N-1,-1,-1):
+    if i + time_table[i][0] > N:
+        if i + time_table[i][0] > N:
+            dp[i] = dp[i+1]
+    else:
+        dp[i] = max(time_table[i][1] + dp[i + time_table[i][0]], dp[i+1])
+
+print(dp[0])
