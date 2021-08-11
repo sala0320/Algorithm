@@ -6,8 +6,8 @@ dp = [0 for i in range(N+1)]
 for t in range(N-1, -1, -1):
     if t + time_table[t][0] > N:
         if t + time_table[t][0] > N:
-            dp[i] = dp[i+1]
+            dp[t] = dp[t+1]
     else:
-        dp[i] = max(time_table[i][1] + dp[i + time_table[i][0]], dp[i+1])
+        dp[it] = max(time_table[t][1] + dp[t + time_table[t][0]], dp[t+1])
 
 print(dp[0])
