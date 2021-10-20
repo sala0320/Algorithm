@@ -33,7 +33,7 @@ def check(list):
     for i in range(N):
         sum += new_board[i].count(0)
     return sum
-def dfs(depth, idx, list):
+def dfs(idx, list):
     global Min
     if idx == len(cctv):
         check_num = check(list)
@@ -42,9 +42,9 @@ def dfs(depth, idx, list):
     else:
         for i in range(cctv_dir[cctv[idx][2]-1]):
             list.append(i)
-            dfs(depth+1, idx+1, list)
+            dfs(idx+1, list)
             list.pop()
         return
 Min = 1e9
-dfs(0,0,[])
+dfs(0,[])
 print(Min)
