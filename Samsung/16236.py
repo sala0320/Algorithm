@@ -18,23 +18,3 @@ N = int(input())
 board = [list(map(int, input().split())) for _ in range(N)]
 dir = [[0,1], [1,0], [-1,0], [0,-1]]
 #아기상어 위치 및 크기
-fish = 0
-for i in range(N):
-    for j in range(N):
-        if board[i][j] == 9:
-            shark = [i, j, 2, 0, 0]
-            board[i][j] = 0
-        if board[i][j] > 0 and board[i][j] < 7:
-            fish.append([i, j, board[i][j]])
-if fish == 0:
-    print(0)
-else:
-
-
-
-
-
-
-
-
-
