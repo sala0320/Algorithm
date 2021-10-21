@@ -3,7 +3,6 @@ import copy
 N, M = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(N)]
 dir = [[0,1], [1,0], [-1,0], [0,-1]]
-print(board)
 result = 0
 #Grouping
 def dfs(x, y, visited):
@@ -11,6 +10,7 @@ def dfs(x, y, visited):
     now = board[x][y]
     queue = deque([[x, y]])
     visited[x][y] = True
+    zero_visited = [list(False for _ in range(N)) for _ in range(N)]
     num = 1
     zero_num = 0
     while(queue):
@@ -20,16 +20,18 @@ def dfs(x, y, visited):
             ny = y + d[1]
             if nx < 0 or nx >= N or ny < 0 or ny >= N:
                 continue
-            if visited[nx][ny] == False:
+            if visited[nx][ny] == False and zero_visited[nx][ny] == False:
                 #board[x][y]가 0일때도 처리해야할까?
                 if board[nx][ny] == 0 or board[nx][ny] == now:
                     num += 1
-                    visited[nx][ny] = True
+
                     queue.append([nx, ny])
                     if board[nx][ny] == now:
                         idx = [nx, ny]
+                        visited[nx][ny] = True
                     if board[nx][ny] == 0:
                         zero_num += 1
+                        zero_visited[nx][ny] = True
     return num, idx, zero_num
 
 #Removing
@@ -63,7 +65,7 @@ def find_block(board):
 
     for i in range(N):
         for j in range(N):
-            if visited[i][j] == True or board[i][j] == -1:
+            if visited[i][j] == True or board[i][j] <= 0:
                 continue
             ret_num, ret_idx, ret_zero = dfs(i, j, visited)
             if ret_num > max_num:
@@ -85,30 +87,40 @@ def find_block(board):
                             max_num = ret_num
                             max_idx = ret_idx
                             max_zero = ret_zero
-    print(max_num)
-    print(max_idx)
-    result += max_num ** 2
-    remove(max_idx[0], max_idx[1])
-    return
+
+
+    return max_num, max_idx
 
 def gravity(board):
-
-
-
-find_block(board)
-print(board)
-
-gravity(board)
-print(board)
-
-new_board = [list(0 for _ in range(N)) for _ in range(N)]
-for i in range(N):
     for j in range(N):
-        new_board[N - 1 - j][i] = board[i][j]
-print(new_board)
+        zero_count = 0
+        for i in range(N-1, 0, -1):
+            if board[i][j] == -2:
+                # if board[i-1][j] == '-1':
+                #     continue
+                if board[i-1][j] == -2:
+                    zero_count += 1
+                elif board[i-1][j] >= 0:
+                    board[i+zero_count][j] = board[i-1][j]
+                    board[i-1][j] = -2
+    return
 
-#gravity생각해보기!!!!
-gravity(new_board)
-print(new_board)
 
-print(result)
+while(True):
+    num, idx = find_block(board)
+    if num < 2:
+        print(result)
+        break
+    result += num ** 2
+    remove(idx[0], idx[1])
+
+
+    gravity(board)
+
+    temp = copy.deepcopy(board)
+    for i in range(N):
+        for j in range(N):
+            board[N - 1 - j][i] = temp[i][j]
+
+
+    gravity(board)
