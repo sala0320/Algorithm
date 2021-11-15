@@ -1,8 +1,31 @@
+from collections import deque
 N, K = map(int, input().split())
-board = list(map(int, input().split()))
-print(board)
+queue = deque(list(map(int, input().split())))
+robot = deque(list([0] * N))
 
-#벨트가 각 칸위에 있는 로봇과 함께 한칸 회전
-#이동하려는 칸에 로봇이 없거나, 내구도가 1이상이면 이동
-#내구도 1이상이면 로봇 올림
-#내구도가 0인 칸의 개수가 K개이상이면 종료
+result = 1
+while True:
+    # 1단계 벨트가 한 칸 회전한다.
+    queue.rotate(1)
+    robot.rotate(1)
+    robot[-1] = 0
+
+    # 2단계 가장 먼저 벨트에 올라간 로봇부터, 벨트가 회전하는 방향으로 한 칸 이동할 수 있다면 이동한다.
+    # 만약 이동할 수 없다면 가만히 있는다.
+    for i in range(-2, -N-1, -1):
+        if robot[i] == 1 and robot[i + 1] == 0 and queue[i + 1 - N] > 0:
+            robot[i] = 0
+            robot[i + 1] = 1
+            queue[i + 1 - N] -= 1
+    robot[-1] = 0
+
+    # 3단계 올라가는 위치에 로봇이 없다면 로봇을 하나 올린다.
+    if robot[0] == 0 and queue[0] > 0:
+        robot[0] = 1
+        queue[0] -= 1
+
+    # 4단계
+    if queue.count(0) >= K:
+        break
+    result += 1
+print(result)
