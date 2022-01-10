@@ -1,4 +1,4 @@
-from collections import deque
+#https://www.acmicpc.net/problem/2667
 N = int(input())
 board = [list(map(int, input())) for _ in range(N)]
 dir = [[0,1], [1,0], [-1,0], [0,-1]]
