@@ -19,4 +19,4 @@ for c in cost:
         union(c[0], c[1])
         result += c[2]
 
-print(result);
+print(result)
