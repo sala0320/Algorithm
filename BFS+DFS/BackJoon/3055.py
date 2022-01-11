@@ -1,6 +1,6 @@
-
 import sys
 from collections import deque
+
 #입력받기
 dx = [-1,1,0,0]
 dy = [0,0,-1,1]
