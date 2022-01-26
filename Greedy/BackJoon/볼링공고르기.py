@@ -10,6 +10,7 @@ def combi(arr, n):
     if n == 1:
         for a in arr:
             result.append([a])
+
     else:
         for i in range(len(arr) - n + 1):
             for temp in combi(arr[i + 1:], n - 1):
