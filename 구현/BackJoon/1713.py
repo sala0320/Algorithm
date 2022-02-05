@@ -1,50 +1,28 @@
-#(학생, 게시시간, 추천수)로 해보기
-
 from collections import deque
 
 N = int(input())
 R = int(input())
 student = list(map(int, input().split()))
-queue = deque([(student[0], 0)])
-student.pop(0)
 
-
-def check(list, s):
-    for l in list:
-        if l[0] == s:
-            return l, l[1]
-    return list[-1], -1
-
-
-def change(list, dup, dup_count, s):
+pic = []
+time = 1
+for t, s in enumerate(student):
     flag = 0
-    # print(list, dup)
-    for i, l in enumerate(list):
-        if l[1] <= dup[1] + 1:
-            # print(i, s)
-            list.insert(i, (s, dup_count + 1))
+    #pic에 이미 추천된 사람이 있는 경우 추천수만 증가
+    for p in pic:
+        if p[0] == s:
+            p[1] += 1
             flag = 1
-            break
+    #pic에 이미 추천된 사람이 없는 경우
     if flag == 0:
-        list.append((s, dup_count + 1))
+        #pic가 꽉 차있다면 우선순위 가장 낮은 것 제거
+        if len(pic) == N:
+            pic.pop()
+        #(학생, 추천수, 게시시간)추가
+        pic.append([s, 1, t])
+    #추천순 많고, 게시시간 큰(가장 최근)순으로 정렬
+    pic.sort(key=lambda x: (-x[1], -x[2]))
 
-    return list
-
-
-for s in student:
-    dup, dup_count = check(queue, s)
-    # print(dup, dup_count)
-    # print(s)
-    length = len(queue)
-    if dup_count == -1:
-        if length == N:
-            queue.remove(dup)
-    else:
-        queue.remove(dup)
-
-    queue = change(queue, dup, dup_count, s)
-    # print(queue)
-queue = list(queue)
-queue.sort(key=lambda x: x[0])
-for q in queue:
-    print(q[0], end=" ")
+pic.sort(key=lambda x: x[0])
+for p in pic:
+    print(p[0], end=" ")
