@@ -13,20 +13,27 @@ for i in range(1, lenB + 1):
             dp[i][j] = dp[i - 1][j - 1]
         else:
             dp[i][j] = min(dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]) + 1
-print(dp)
+
 x, y = lenB, lenA
-while (x >= 0 and y >= 0):
-    # print(x, y)
-    min_num = min(dp[x - 1][y - 1], dp[x][y - 1], dp[x - 1][y])
-    if min_num == dp[x][y - 1]:
-        print('d', B[x - 1])
-        x, y = x, y - 1
-    elif min_num == dp[x - 1][y]:
-        print('a', B[x - 1])
-        x, y = x - 1, y
-    elif dp[x][y] == dp[x - 1][y - 1]:
-        print('c', B[x - 1])
+now = lenB - 1
+result = []
+while (True):
+    if x <= 0 and y <= 0:
+        break
+    if dp[x][y] == dp[x - 1][y - 1]:
+        result.append(['c', B[now]])
         x, y = x - 1, y - 1
-    elif min_num == dp[x - 1][y - 1]:
-        print('m', B[x - 1])
-        x, y = x - 1, y - 1
+    else:
+        min_num = min(dp[x - 1][y - 1], dp[x][y - 1], dp[x - 1][y])
+        if min_num == dp[x][y - 1]:
+            result.append(['d', B[now]])
+            x, y = x, y - 1
+        elif min_num == dp[x - 1][y]:
+            result.append(['a', B[now]])
+            x, y = x - 1, y
+        elif min_num == dp[x - 1][y - 1]:
+            result.append(['m', B[now]])
+            x, y = x - 1, y - 1
+    now -= 1
+for r in range(len(result) - 1, -1, -1):
+    print(result[r][0], result[r][1])
